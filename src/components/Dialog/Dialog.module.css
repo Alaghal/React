@@ -1,0 +1,28 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 5fr 20fr;
+    padding: 10px;
+}
+
+.messagePage {
+    display: grid;
+    grid-auto-rows: 0.0fr;
+}
+
+.addMessageBox  textarea {
+    width: 500px;
+    height: 150px;
+
+}
+
+.addMessageBox {
+    display: grid;
+    justify-items: center;
+}
+
+.addMessageButton {
+    display: grid;
+    justify-items: end;
+    margin-right: 105px;
+}
+

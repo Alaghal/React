@@ -1,0 +1,17 @@
+
+
+.message {
+    padding: 20px;
+    margin-left: 160px;
+    margin-right: 160px;
+}
+
+.messageCurrentUser {
+    text-align: left;
+
+}
+
+.messageOtherUser {
+    text-align: right;
+
+}

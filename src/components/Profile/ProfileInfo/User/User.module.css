@@ -1,0 +1,14 @@
+.user {
+    display: grid;
+    grid-template-columns: 5fr 15fr;
+    padding: 10px;
+}
+
+.user img {
+
+}
+
+.user blockquote {
+    margin-top: 50px;
+    margin-right: 300px;
+}

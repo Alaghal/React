@@ -1,0 +1,14 @@
+.info {
+
+}
+
+.worldWideImag {
+    width: 1000px;
+    height: 500px;
+}
+
+.info .user {
+    display: grid;
+    grid-template-columns: 15fr 10fr;
+    padding: 10px;
+}

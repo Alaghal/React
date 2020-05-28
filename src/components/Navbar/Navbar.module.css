@@ -1,0 +1,29 @@
+.nav {
+    grid-area: n;
+    background-color: chocolate;
+    padding: 20px;
+}
+
+.item a {
+    color: lightyellow;
+    text-decoration: none;
+}
+
+.item  a.activeLink {
+    color: deepskyblue;
+}
+
+.listFriend  {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    grid-template-rows: 0fr 1fr 1fr;
+
+}
+
+.listFriend .textNavBar {
+    margin-top: 30px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
