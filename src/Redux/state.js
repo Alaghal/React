@@ -84,13 +84,14 @@ let store = {
         if (action.type === "ADD-POST") {
             let newPost = {
                 id: "5",
-                message: postMessage,
+                message: action.newText,
                 countLike: "0"
             };
             this._state.postPage.messagesPost.push(newPost);
             this._state.postPage.newPostText='';
             this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-POST-") {
+        } else
+            if (action.type === "UPDATE-POST-NEW-TEXT") {
             this._state.postPage.newPostText = action.newText;
             this._callSubscriber(this._state)
         }

@@ -10,13 +10,14 @@ const MyPost = (props) => {
 
     let addPost = () => {
         let text = newPostElement.current.value;
-        props.addPost(text);
+        props.dispatch({type: "ADD-POST", newText: text});
     }
 
     let updatePost = () => {
         debugger;
         let text = newPostElement.current.value;
-        props.updatePostText(text);
+        props.dispatch({type: "UPDATE-POST-NEW-TEXT", newText: text});
+
     }
 
     return (
