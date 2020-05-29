@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_POST = 'UPDATE-POST-NEW-TEXT';
+
 let store = {
     _state: {
         postPage: {
@@ -76,22 +79,21 @@ let store = {
             ]
         }
     },
-    getState () {
+    getState() {
         return this._state;
     },
 
-    dispatch (action) {
-        if (action.type === "ADD-POST") {
+    dispatch(action) {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: "5",
-                message: action.newText,
+                message: this._state.postPage.newPostText,
                 countLike: "0"
             };
             this._state.postPage.messagesPost.push(newPost);
-            this._state.postPage.newPostText='';
+            this._state.postPage.newPostText = '';
             this._callSubscriber(this._state);
-        } else
-            if (action.type === "UPDATE-POST-NEW-TEXT") {
+        } else if (action.type === UPDATE_POST) {
             this._state.postPage.newPostText = action.newText;
             this._callSubscriber(this._state)
         }
@@ -106,6 +108,9 @@ let store = {
 
 }
 
+export const addPostAction = () => ({type: ADD_POST});
+
+export const updatePostAction = (text) => ({type: UPDATE_POST, newText: text})
 
 export default store
 
