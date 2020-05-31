@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST = 'UPDATE-POST-NEW-TEXT';
-const ADD_DIALOG_MESSAGE = 'ADD_DIALOG_MESSAGE';
-const UPDATE_DIALOG_MESSAGE = 'UPDATE_DIALOG_MESSAGE';
+import dialogReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import navbarReducer from "./navbarReducer";
 
 let store = {
     _state: {
@@ -87,40 +86,10 @@ let store = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                let newPost = {
-                    id: "5",
-                    message: this._state.postPage.newPostText,
-                    countLike: "0"
-                };
-                this._state.postPage.messagesPost.push(newPost);
-                this._state.postPage.newPostText = '';
-                this._callSubscriber(this._state);
-                break;
-            case  UPDATE_POST:
-                this._state.postPage.newPostText = action.newText;
-                this._callSubscriber(this._state);
-                break;
-            case ADD_DIALOG_MESSAGE:
-                let messageDialog = {
-                    id: "1",
-                    idUser: "1",
-                    message: this._state.dialogsPage.newDialogMessage
-                };
-
-                this._state.dialogsPage.messages.push(messageDialog);
-                this._state.dialogsPage.newDialogMessage = '';
-                this._callSubscriber(this._state);
-                break;
-            case  UPDATE_DIALOG_MESSAGE:
-                this._state.dialogsPage.newDialogMessage = action.newText;
-                this._callSubscriber(this._state);
-                break;
-            default:
-
-        }
-
+        this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action);
+        this._state.postPage = profileReducer(this._state.postPage, action);
+        this._state.navBarPage = navbarReducer(this._state.navBarPage, action);
+        this._callSubscriber(this._state);
     },
 
     _callSubscriber() {
@@ -131,14 +100,6 @@ let store = {
     }
 
 }
-
-export const addPostAction = () => ({type: ADD_POST});
-
-export const updatePostAction = (text) => ({type: UPDATE_POST, newText: text});
-
-export const addMessageDialogAction = () => ({type: ADD_DIALOG_MESSAGE});
-
-export const updateMessageDialog = (text) => ({type: UPDATE_DIALOG_MESSAGE, newText: text})
 
 export default store
 

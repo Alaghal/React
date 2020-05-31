@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './MyPost.module.css';
 import Post from "./Post/Post";
-import {addPostAction, updatePostAction} from "../../../Redux/state";
+import {addPostAction, updatePostAction} from "../../../Redux/profileReducer";
 
 
 const MyPost = (props) => {
@@ -11,6 +11,7 @@ const MyPost = (props) => {
 
     let addPost = () => {
         props.dispatch(addPostAction());
+        newPostElement.current.value = '';
     }
 
     let updatePost = () => {
