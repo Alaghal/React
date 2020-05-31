@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST = 'UPDATE-POST-NEW-TEXT';
+const ADD_DIALOG_MESSAGE = 'ADD_DIALOG_MESSAGE';
+const UPDATE_DIALOG_MESSAGE = 'UPDATE_DIALOG_MESSAGE';
 
 let store = {
     _state: {
@@ -57,7 +59,8 @@ let store = {
                 {id: "3", idUser: "4", message: "Привет"},
                 {id: "4", idUser: "4", message: "заебись, у тебя как ?"},
                 {id: "5", idUser: "1", message: "тож норм=)"},
-            ]
+            ],
+            newDialogMessage: ""
         },
         navBarPage: {
             friends: [
@@ -84,19 +87,40 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: "5",
-                message: this._state.postPage.newPostText,
-                countLike: "0"
-            };
-            this._state.postPage.messagesPost.push(newPost);
-            this._state.postPage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_POST) {
-            this._state.postPage.newPostText = action.newText;
-            this._callSubscriber(this._state)
+        switch (action.type) {
+            case ADD_POST:
+                let newPost = {
+                    id: "5",
+                    message: this._state.postPage.newPostText,
+                    countLike: "0"
+                };
+                this._state.postPage.messagesPost.push(newPost);
+                this._state.postPage.newPostText = '';
+                this._callSubscriber(this._state);
+                break;
+            case  UPDATE_POST:
+                this._state.postPage.newPostText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+            case ADD_DIALOG_MESSAGE:
+                let messageDialog = {
+                    id: "1",
+                    idUser: "1",
+                    message: this._state.dialogsPage.newDialogMessage
+                };
+
+                this._state.dialogsPage.messages.push(messageDialog);
+                this._state.dialogsPage.newDialogMessage = '';
+                this._callSubscriber(this._state);
+                break;
+            case  UPDATE_DIALOG_MESSAGE:
+                this._state.dialogsPage.newDialogMessage = action.newText;
+                this._callSubscriber(this._state);
+                break;
+            default:
+
         }
+
     },
 
     _callSubscriber() {
@@ -110,7 +134,11 @@ let store = {
 
 export const addPostAction = () => ({type: ADD_POST});
 
-export const updatePostAction = (text) => ({type: UPDATE_POST, newText: text})
+export const updatePostAction = (text) => ({type: UPDATE_POST, newText: text});
+
+export const addMessageDialogAction = () => ({type: ADD_DIALOG_MESSAGE});
+
+export const updateMessageDialog = (text) => ({type: UPDATE_DIALOG_MESSAGE, newText: text})
 
 export default store
 
