@@ -5,15 +5,15 @@ import MyPost from "./MyPost";
 const MyPostContainer = (props) => {
 
     let addPost = () => {
-        props.dispatch(addPostAction());
+        props.store.dispatch(addPostAction());
     }
 
     let updatePost = (text) => {
-        props.dispatch(updatePostAction(text));
+        props.store.dispatch(updatePostAction(text));
     }
 
     return (
-            <MyPost addPost={addPost} updatePost={updatePost} postPage={props.postPage} />
+            <MyPost addPost={addPost} updatePost={updatePost} postPage={props.state.postPage} />
         )
 }
 
