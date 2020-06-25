@@ -11,13 +11,13 @@ const Dialog = (props) => {
     let newMessageText = React.createRef();
 
     let addMessage = () => {
-        props.dispatch(addMessageDialogAction());
+        props.addMessage();
         newMessageText.current.value = '';
     }
 
     let updateMessage = () => {
         let text = newMessageText.current.value;
-        props.dispatch(updateMessageDialog(text));
+        props.updateMessage(text);
     }
     return (
         <div className={classes.dialogs}>
