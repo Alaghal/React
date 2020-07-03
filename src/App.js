@@ -19,7 +19,7 @@ const App = (props) => {
                     <Route path='/profile'  render={() => <Profile />}/>
                     <Route path='/messages' render={() => <DialogContainer />}/>
                     <Route path='/News' component={News}/>
-                    <Route path='/Music' component={Music}/>
+    vv                <Route path='/Music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
                 </div>
             </div>
