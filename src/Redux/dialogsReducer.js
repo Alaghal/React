@@ -47,26 +47,31 @@ let initialState = {
         {id: "4", idUser: "4", message: "заебись, у тебя как ?"},
         {id: "5", idUser: "1", message: "тож норм=)"},
     ],
-    newDialogMessage: ""
+    newDialogMessage: ''
 }
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_DIALOG_MESSAGE:
-            let messageDialog = {
-                id: "1",
-                idUser: "1",
-                message: state.newDialogMessage
-            };
+        case ADD_DIALOG_MESSAGE: {
+            return {
+                ...state,
+                messages: [...state.messages, {
+                    id: "1",
+                    idUser: "1",
+                    message: state.newDialogMessage
+                }],
+                newDialogMessage: ''
+            }
+        }
+        case  UPDATE_DIALOG_MESSAGE: {
+            return {
+                ...state,
+                newDialogMessage: action.newText
+            }
+        }
 
-            state.messages.push(messageDialog);
-            state.newDialogMessage = '';
-            return state;
-        case  UPDATE_DIALOG_MESSAGE:
-            state.newDialogMessage = action.newText;
-            return state;
         default:
-            return  state;
+            return state;
     }
 
 }

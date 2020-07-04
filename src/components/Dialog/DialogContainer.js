@@ -1,15 +1,13 @@
 import React from 'react';
 import {addMessageDialogAction, updateMessageDialog} from "../../Redux/dialogsReducer";
 import Dialog from "./Dialog";
-import StoreContext from "../../StoreContext";
-import {addPostAction, updatePostAction} from "../../Redux/profileReducer";
 import {connect} from "react-redux";
-
 
 
 let mapStateToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        newDialogMessage: state.newDialogMessage
     }
 }
 
