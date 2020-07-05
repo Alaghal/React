@@ -4,8 +4,8 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 const Dialog = (props) => {
-    let dialogItem = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} name={d.name} imgPath={d.imgPath}/>);
-    let messageItem = props.dialogsPage.messages.map(m => <Message message={m.message} idUser={m.idUser}/>);
+    let dialogItem = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} key={d.id} name={d.name} imgPath={d.imgPath}/>);
+    let messageItem = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id} id={m.id} idUser={m.idUser}/>);
 
     let newMessageText = React.createRef();
 

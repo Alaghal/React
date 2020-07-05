@@ -8,8 +8,12 @@ const Navbar = (props) => {
 
     return <StoreContext.Consumer>
         {
-            store =>{
-                let friends = store.getState().navBarPage.friends.map(m => <Friend imgUrl={m.url} id={m.id}/>)
+            store => {
+                let friends = store.getState().userPage.users.map(m => {
+                    if (m.followed === true) {
+                        return <Friend imgUrl={m.photoUser} key={m.id} id={m.id}/>
+                    }
+                })
                 return (
                     <nav className={classes.nav}>
                         <div className={`${classes.item} ${classes.active}`}>
@@ -30,7 +34,7 @@ const Navbar = (props) => {
 
                         <div className={`${classes.item} ${classes.listFriend}`}>
                             <div className={classes.textNavBar}>
-                                <NavLink to={'/friends'} activeClassName={classes.activeLink}>Friends</NavLink>
+                                <NavLink to={'/users'} activeClassName={classes.activeLink}>Friends</NavLink>
                             </div>
 
                             {friends}
@@ -41,8 +45,8 @@ const Navbar = (props) => {
                     </nav>)
             }
         }
-    </StoreContext.Consumer>
+            </StoreContext.Consumer>
 
-}
+            }
 
-export default Navbar;
+            export default Navbar;
