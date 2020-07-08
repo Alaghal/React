@@ -6,7 +6,7 @@ import Friend from "./Friend/Friend";
 const Navbar = (props) => {
     let friends = props.userPage.users.map(m => {
         if (m.followed === true) {
-            return <Friend imgUrl={m.photoUser} key={m.id} id={m.id}/>
+            return <Friend imgUrl={m.photos.small} key={m.id} id={m.id}/>
         }
     })
 

@@ -15,3 +15,7 @@
      height: 50px;
     width: 200px;
 }
+
+.selectedPage {
+    font-weight: bold;
+}
