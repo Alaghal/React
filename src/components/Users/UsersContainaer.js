@@ -16,7 +16,12 @@ import PreLoader from "../commons/PreLoader/PreLoader";
 class UserContainer extends React.Component {
     componentDidMount() {
         this.props.toggleFetchingStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+            withCredentials: true,
+            headers: {
+                "API-KEY" : "0f23a133-f1e0-461c-8767-50ef7f7956e8"
+            }
+        })
             .then(response => {
                 this.props.toggleFetchingStatus(false);
                 this.props.setUsers(response.data.items);
@@ -27,7 +32,12 @@ class UserContainer extends React.Component {
     onPageChange = (pageNumber) => {
         this.props.setCurentPage(pageNumber);
         this.props.toggleFetchingStatus(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
+            withCredentials: true,
+            headers: {
+                "API-KEY" : "0f23a133-f1e0-461c-8767-50ef7f7956e8"
+            }
+        })
             .then(response => {
                 this.props.toggleFetchingStatus(false)
                 this.props.setUsers(response.data.items);
