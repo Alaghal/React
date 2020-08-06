@@ -2,7 +2,7 @@ import React from "react";
 import classes from './User.module.css'
 import userPhoto from '../../../assets/image/user.png'
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+import {usersAPI} from "../../../api/api";
 
 const User = (props) => {
     return (
@@ -14,35 +14,20 @@ const User = (props) => {
             </div>
             <div className={classes.button}> {props.followed
                 ? <button onClick={() => {
-
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {
-                        withCredentials: true,
-                        headers: {
-                            "API-KEY" : "0f23a133-f1e0-461c-8767-50ef7f7956e8"
-                        }
-                    })
+                    usersAPI.unFollow(props.id)
                         .then(response => {
                             if (response.data.resultCode == 0) {
                                 props.unFollow(props.id)
                             }
                         });
-
-
                 }}>UnFollow</button>
                 : <button onClick={() => {
-
-                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {}, {
-                        withCredentials: true,
-                        headers: {
-                            "API-KEY" : "0f23a133-f1e0-461c-8767-50ef7f7956e8"
-                        }
-                    })
-                        .then(response => {
-                            if (response.data.resultCode == 0) {
+                    usersAPI.follow(props.id)
+                        .then(data => {
+                            if (data.resultCode == 0) {
                                 props.follow(props.id)
                             }
                         });
-
                 }}>Follow</button>}
             </div>
             <div className={classes.name}><span>{props.name}</span></div>

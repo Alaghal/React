@@ -4,7 +4,6 @@ import Avatar from "../Avatar/Avatar";
 import Description from "../Description/Description";
 
 const User = (props) => {
-    debugger;
     return (
         <div className={Classes.user}>
            <Avatar img={props.profile.photos.large} />
