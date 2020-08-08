@@ -13,20 +13,24 @@ const User = (props) => {
                 </NavLink>
             </div>
             <div className={classes.button}> {props.followed
-                ? <button onClick={() => {
+                ? <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={() => {
+                    props.toggleFollowingInProgress(true, props.id);
                     usersAPI.unFollow(props.id)
-                        .then(response => {
-                            if (response.data.resultCode == 0) {
+                        .then(data => {
+                            if (data.resultCode == 0) {
                                 props.unFollow(props.id)
                             }
+                            props.toggleFollowingInProgress(false,props.id);
                         });
                 }}>UnFollow</button>
-                : <button onClick={() => {
+                : <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={() => {
+                    props.toggleFollowingInProgress(true,props.id);
                     usersAPI.follow(props.id)
                         .then(data => {
                             if (data.resultCode == 0) {
                                 props.follow(props.id)
                             }
+                            props.toggleFollowingInProgress(false,props.id);
                         });
                 }}>Follow</button>}
             </div>

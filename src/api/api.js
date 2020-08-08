@@ -23,7 +23,7 @@ export const  usersAPI = {
     },
 
     follow (id= 1) {
-      return   instance.post(`follow/${id}`)
+      return   instance.post(`follow/${id}`,{})
             .then(response => {
                 return response.data;
             });

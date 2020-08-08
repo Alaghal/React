@@ -29,7 +29,10 @@ const Users = (props) => {
                                                  urlAvatar={u.photos.small}
                                                  name={u.name} status={u.status}
                                                  follow={props.follow}
-                                                 unFollow={props.unFollow}/>)}
+                                                 unFollow={props.unFollow}
+                                                 toggleFollowingInProgress={props.toggleFollowingInProgress}
+                                                 followingInProgress={props.followingInProgress}
+            />)}
         </div>
 
         <div>
