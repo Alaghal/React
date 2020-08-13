@@ -2,7 +2,6 @@ import React from "react";
 import classes from './User.module.css'
 import userPhoto from '../../../assets/image/user.png'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
 
 const User = (props) => {
     return (
@@ -14,24 +13,10 @@ const User = (props) => {
             </div>
             <div className={classes.button}> {props.followed
                 ? <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={() => {
-                    props.toggleFollowingInProgress(true, props.id);
-                    usersAPI.unFollow(props.id)
-                        .then(data => {
-                            if (data.resultCode == 0) {
-                                props.unFollow(props.id)
-                            }
-                            props.toggleFollowingInProgress(false,props.id);
-                        });
+                  props.unFollow(props.id);
                 }}>UnFollow</button>
                 : <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={() => {
-                    props.toggleFollowingInProgress(true,props.id);
-                    usersAPI.follow(props.id)
-                        .then(data => {
-                            if (data.resultCode == 0) {
-                                props.follow(props.id)
-                            }
-                            props.toggleFollowingInProgress(false,props.id);
-                        });
+                    props.follow(props.id);
                 }}>Follow</button>}
             </div>
             <div className={classes.name}><span>{props.name}</span></div>
