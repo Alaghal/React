@@ -1,5 +1,19 @@
 import {connect} from "react-redux";
 import Navbar from "./Navbar";
+import {getFriends} from "../../Redux/usersReducer";
+import * as React from "react";
+
+class NavbarContainer extends React.Component {
+    componentDidMount() {
+        this.props.getFriends(1,10);
+    }
+
+    render() {
+        return <Navbar
+            userPage={this.props.userPage}/>
+    }
+}
+
 
 let mapStateToProps = (state) => {
     return {
@@ -7,10 +21,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-
-}
-
-const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
-
-export default NavbarContainer
+export default connect(mapStateToProps, {getFriends})(NavbarContainer);

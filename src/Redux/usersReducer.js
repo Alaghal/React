@@ -1,4 +1,5 @@
 import {usersAPI} from "../api/api";
+import React from "react";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -7,6 +8,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
 const TOGGLE_FETCHING_STATUS = 'TOGGLE_FETCHING_STATUS';
 const TOGGLE_FETCHING_IN_PROGRESS = 'TOGGLE_FETCHING_IN_PROGRESS';
+const SET_FRIENDS = 'SET_FRIENDS';
 
 let initialState = {
     users: [],
@@ -14,11 +16,12 @@ let initialState = {
     totalUsersCount: 10,
     numberCurrentPage: 2,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    friends: []
 
 }
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState,action) => {
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -28,7 +31,8 @@ const usersReducer = (state = initialState, action) => {
                         return {...u, followed: true}
                     }
                     return u;
-                })
+                }),
+
             }
         }
         case UNFOLLOW: {
@@ -74,7 +78,12 @@ const usersReducer = (state = initialState, action) => {
                     : state.followingInProgress.filter(id => id != action.userId)
             }
         }
-
+        case SET_FRIENDS: {
+            return {
+                ...state,
+                friends: action.friends
+            }
+        }
         default:
             return state;
     }
@@ -85,13 +94,15 @@ export const followSuccess = (id) => ({type: FOLLOW, userId: id});
 
 export const unFollowSuccess = (id) => ({type: UNFOLLOW, userId: id});
 
-export const setUsers = (users) => ({type: SET_USERS, users: users})
+export const setUsers = (users) => ({type: SET_USERS, users: users});
 
-export const setCurentPage = (numberOfPage) => ({type: SET_CURRENT_PAGE, numberCurrentPage: numberOfPage})
+export const setCurentPage = (numberOfPage) => ({type: SET_CURRENT_PAGE, numberCurrentPage: numberOfPage});
 
-export const setTotalUserCount = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers: totalUsers})
+export const setTotalUserCount = (totalUsers) => ({type: SET_TOTAL_USERS, totalUsers: totalUsers});
 
-export const toggleFetchingStatus = (fetchingStatus) => ({type: TOGGLE_FETCHING_STATUS, fetchingStatus: fetchingStatus})
+export const toggleFetchingStatus = (fetchingStatus) => ({type: TOGGLE_FETCHING_STATUS, fetchingStatus: fetchingStatus});
+
+export const setFriends = (friends) =>  ({type: SET_FRIENDS, friends })
 
 export const toggleFollowingInProgress = (fetchingStatus, userId) => ({
     type: TOGGLE_FETCHING_IN_PROGRESS,
@@ -108,6 +119,15 @@ export const getUsers = (currentPage, pageSize) => {
                 dispatch(toggleFetchingStatus(false));
                 dispatch(setUsers(data.items));
                 dispatch(setTotalUserCount(data.totalCount));
+            })
+    }
+}
+
+export const getFriends = (currentPage, pageSize) => {
+    return  (dispatch) => {
+        usersAPI.getFriends(currentPage, pageSize)
+            .then(data => {
+                dispatch(setFriends(data.items));
             })
     }
 }

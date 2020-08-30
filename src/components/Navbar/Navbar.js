@@ -37,8 +37,6 @@ const Navbar = (props) => {
                 {friends}
 
             </div>
-
-
         </nav>)
 }
 
