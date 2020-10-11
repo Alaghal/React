@@ -8,35 +8,35 @@ const instance = axios.create({
     }
 });
 
-export const  usersAPI = {
-    getUsers  (currentPage= 1, pageSize=10)  {
-       return  instance.get(`users?page=${currentPage}&count=${pageSize}`)
+export const usersAPI = {
+    getUsers(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data;
             });
     },
-     getFriends (currentPage= 1, pageSize=10) {
-        return  instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`)
+    getFriends(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`)
             .then(response => {
                 return response.data;
             });
     },
-    unFollow (id) {
-     return    instance.delete(`follow/${id}`)
-            .then(response => {
-                return response.data;
-            });
-    },
-
-    follow (id) {
-      return   instance.post(`follow/${id}`,{})
+    unFollow(id) {
+        return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data;
             });
     },
 
-    getUser () {
-      return  instance.get(`auth/me`)
+    follow(id) {
+        return instance.post(`follow/${id}`, {})
+            .then(response => {
+                return response.data;
+            });
+    },
+
+    getUser() {
+        return instance.get(`auth/me`)
             .then(response => {
                 return response.data;
             });
@@ -44,11 +44,21 @@ export const  usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile  (userID)  {
-     return instance.get(`profile/${userID}`)
+    getProfile(userID) {
+        return instance.get(`profile/${userID}`)
             .then(response => {
                 return response.data;
             });
+    },
+
+    getUserStatus(userID) {
+        return instance.get(`profile/status/` + userID)
+            .then(response => {
+                return response.data;
+            })
+    },
+    updateUserStatus(status) {
+        return instance.put(`profile/status`, status)
     }
 }
 

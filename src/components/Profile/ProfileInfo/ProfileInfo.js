@@ -1,7 +1,7 @@
 import React from 'react';
 import Classes from './ProfileInfo.module.css';
-import WorldWideImg from "./WorldWideImg/WorldWideImg";
 import User from "./User/User";
+import UserStatus from "./User/UserStatus";
 import PreLoader from "../../commons/PreLoader/PreLoader";
 
 const ProfileInfo = (props) => {
@@ -10,8 +10,8 @@ const ProfileInfo = (props) => {
     }
     return (
         <div className={Classes.info}>
-            <WorldWideImg/>
-            <User profile={props.profile}/>
+            <User profile={props.profile} />
+            <UserStatus status={props.status} updateStatus={props.updateStatus}/>
         </div>);
 }
 

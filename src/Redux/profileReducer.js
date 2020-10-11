@@ -4,6 +4,7 @@ import {toggleFollowingInProgress, unFollowSuccess} from "./usersReducer";
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST = 'UPDATE-POST-NEW-TEXT';
 const SET_PROFILE_USER = 'SET_PROFILE_USER';
+const SET_USER_STATUS = 'SET_USER_STATUS'
 
 let initialState = {
     messagesPost: [
@@ -13,7 +14,8 @@ let initialState = {
         {id: "4", message: "Message 4", countLike: "17"},
     ],
     newPostText: 'it',
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -40,6 +42,12 @@ const profileReducer = (state = initialState, action) => {
                 profile: action.profile
             }
         }
+        case SET_USER_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
     }
@@ -50,7 +58,25 @@ export const addPost = () => ({type: ADD_POST});
 
 export const updatePost = (text) => ({type: UPDATE_POST, newText: text});
 
-export const setProfilePage = (profile) => ({type:SET_PROFILE_USER, profile:profile})
+export const setProfilePage = (profile) => ({type:SET_PROFILE_USER, profile:profile});
+
+export const setUserStatus = (status) => ({type:SET_USER_STATUS, status})
+
+export const getUserStatus = (userID) => (dispatch) => {
+    profileAPI.getUserStatus(userID)
+        .then(data => {
+            dispatch (setUserStatus(data))
+        } )
+}
+
+export const updateUserStatus = (status) => (dispatch) => {
+    profileAPI.updateUserStatus(status)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setUserStatus(data))
+            }
+        } )
+}
 
 export const getProfile = (userId) => {
     return  (dispatch) => {
