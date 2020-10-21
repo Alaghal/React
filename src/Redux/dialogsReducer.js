@@ -47,26 +47,19 @@ let initialState = {
         {id: "4", idUser: "4", message: "заебись, у тебя как ?"},
         {id: "5", idUser: "1", message: "тож норм=)"},
     ],
-    newDialogMessage: ''
 }
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DIALOG_MESSAGE: {
+            let textBody =  action.newMessageText
             return {
                 ...state,
                 messages: [...state.messages, {
                     id: "1",
                     idUser: "1",
-                    message: state.newDialogMessage
+                    message: textBody
                 }],
-                newDialogMessage: ''
-            }
-        }
-        case  UPDATE_DIALOG_MESSAGE: {
-            return {
-                ...state,
-                newDialogMessage: action.newText
             }
         }
 
@@ -76,8 +69,7 @@ const dialogReducer = (state = initialState, action) => {
 
 }
 
-export const addMessage = () => ({type: ADD_DIALOG_MESSAGE});
+export const addMessage = (newMessageText) => ({type: ADD_DIALOG_MESSAGE, newMessageText});
 
-export const updateMessage = (text) => ({type: UPDATE_DIALOG_MESSAGE, newText: text})
 
 export default dialogReducer;
