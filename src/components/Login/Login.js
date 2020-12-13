@@ -3,6 +3,10 @@ import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {login} from "../../Redux/authReducer";
+import {Input} from "../commons/FormControls/FormControls";
+import {maxLengthCreator, required} from "../../utils/validators/validator";
+
+const maxLength100 = maxLengthCreator(100);
 
 const LoginForm = (props) => {
     return (
@@ -10,19 +14,21 @@ const LoginForm = (props) => {
             <div>
                 <Field placeholder={'Email'}
                        name={"email"}
-                       component={"input"}>
+                       validate={[required,maxLength100]}
+                       component={Input}>
                 </Field>
             </div>
             <div>
                 <Field placeholder={'Password'}
                        name={"password"}
-                       component={"input"}>
+                       validate={[required,maxLength100]}
+                       component={Input}>
                 </Field>
             </div>
             <div>
                 <Field type="checkbox"
                        name={"rememberMe"}
-                       component={"input"}>
+                       component={Input}>
                 </Field> remember me
             </div>
             <div>
