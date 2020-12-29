@@ -1,6 +1,6 @@
 import {
     follow,
-    getUsers,
+    requestUsers,
     setCurentPage,
     setUsers,
     toggleFollowingInProgress,
@@ -65,7 +65,7 @@ export default compose (
         setUsers,
         setCurentPage,
         toggleFollowingInProgress,
-        getUsers
+        getUsers: requestUsers
     }),
     withAuthRedirect)
 (UserContainer)
